@@ -28,9 +28,13 @@ public class InventoryController {
         return new ApiResponse<>(201, "入库单创建成功", order);
     }
 
-    /**
-     * 库存查询 — 候选人实现
-     */
+    @PostMapping("/outbound-orders")
+    public ApiResponse<OutboundOrderResponse> createOutboundOrder(
+            @Valid @RequestBody OutboundOrderCreateRequest request) {
+        OutboundOrderResponse order = outboundOrderService.createOutboundOrder(request);
+        return new ApiResponse<>(201, "出库单创建成功", order);
+    }
+
     @GetMapping("/inventory")
     public ApiResponse<PageResult<InventoryResponse>> queryInventory(
             @RequestParam(required = false) String keyword,
